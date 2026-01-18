@@ -1,0 +1,119 @@
+layer:
+# A layer is a collection of pre-configured source files or components
+  type: Device
+  description: STM32F1xx device layer
+  
+  packs:
+    - pack: Keil::STM32F1xx_DFP
+
+  define:
+    - USE_HAL_DRIVER
+    - USE_FULL_LL_DRIVER
+
+  add-path:
+    # device
+    - ../../../../omni/soc/st/stm32
+    - ../../../../modules/hal_stm32/stm32cube/stm32f1xx/device/src
+    - ../../../../modules/hal_stm32/stm32cube/common/include
+    - ../../../../modules/hal_stm32/stm32cube/stm32f1xx
+    - ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/include
+    - ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/include/Legacy
+    - ../../../../modules/hal_stm32/stm32cube/stm32f1xx/device/include
+
+  linker:
+    - script: ./$ProjectDir()$/boards/$TargetType$/startup/stm32f103xb_flash.sct
+      for-compiler: AC6
+      for-context: +stm32f103cb
+    # - script: ./$ProjectDir()$/boards/$TargetType$/startup/stm32f103xb_ram.sct
+    #   for-compiler: AC6
+    #   for-context: +stm32f103cb_ram
+    - script: ./$ProjectDir()$/boards/$TargetType$/startup/stm32f103xb_flash.ld
+      for-compiler: 
+        - GCC
+        - CLANG
+      for-context: +stm32f103cb
+
+  # It is recommended to list the packs that contain the components in the cproject.yml file.
+  groups:
+    - group: device/startup
+      files:
+        - file: ./device/src/system_stm32f1xx.c
+        - file: ./device/src/startup_stm32f103xx.c
+    - group: device/hal
+      files:
+        - file: ../../../../omni/soc/st/stm32/hal/syscalls.c
+          for-compiler: GCC
+        - file: ../../../../omni/soc/st/stm32/hal/sysmem.c
+          for-compiler: GCC
+        - file: ../../../../omni/soc/st/stm32/hal/hal_can.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_dma.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_gpio.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_hwinfo.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_hwtimer.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_i2c.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_irq.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_spi.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_timer.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_udc.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_uhc.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_usart.c
+    - group: device/driver
+      files:
+        - file: ../../../../omni/soc/st/stm32/stm32f1xx/soc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_adc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_adc_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_can.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_cec.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_cortex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_crc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_dac.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_dac_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_dma.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_eth.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_exti.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_flash.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_flash_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_gpio.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_gpio_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_i2c.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_i2s.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_irda.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_iwdg.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_mmc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_nand.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_nor.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_pccard.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_pcd.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_pcd_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_pwr.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_rcc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_rcc_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_rtc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_rtc_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_sd.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_smartcard.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_spi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_sram.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_tim.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_tim_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_uart.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_usart.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_hal_wwdg.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_adc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_crc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_dac.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_dma.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_exti.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_fsmc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_gpio.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_i2c.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_pwr.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_rcc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_rtc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_sdmmc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_spi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_tim.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_usart.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_usb.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32f1xx/drivers/src/stm32f1xx_ll_utils.c

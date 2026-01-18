@@ -1,0 +1,183 @@
+layer:
+# A layer is a collection of pre-configured source files or components
+  type: Device
+  description: STM32H7xx device layer
+  
+  packs:
+    - pack: Keil::STM32H7xx_DFP@4.1.3
+
+  define:
+    - USE_HAL_DRIVER
+    - USE_FULL_LL_DRIVER
+
+  add-path:
+    # device
+    - ../../../../omni/soc/st/stm32
+    - ../../../../modules/hal_stm32/stm32cube/stm32h7xx/device/src
+    - ../../../../modules/hal_stm32/stm32cube/common/include
+    - ../../../../modules/hal_stm32/stm32cube/stm32h7xx
+    - ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/include
+    - ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/include/Legacy
+    - ../../../../modules/hal_stm32/stm32cube/stm32h7xx/device/include
+
+  linker:
+    - script: ./$ProjectDir()$/boards/$TargetType$/startup/stm32h743xx_flash.sct
+      for-compiler: AC6
+      for-context: +stm32h743ii
+    # - script: ./$ProjectDir()$/boards/$TargetType$/startup/stm32h743xx_ram.sct
+    #   for-compiler: AC6
+    #   for-context: +stm32h743ii_ram
+    - script: ./$ProjectDir()$/boards/$TargetType$/startup/stm32h743xx_flash.ld
+      for-compiler: 
+        - GCC
+        - CLANG
+      for-context: +stm32h743ii
+
+  # It is recommended to list the packs that contain the components in the cproject.yml file.
+  groups:
+    - group: device/startup
+      files:
+        - file: ./device/src/system_stm32h7xx.c
+        - file: ./$ProjectDir()$/boards/$TargetType$/startup/startup_stm32h743xx.s
+        # - file: ./device/src/startup_stm32h743xx.c
+          for-compiler: AC6
+          for-context: +stm32h743ii
+    - group: device/hal
+      files:
+        - file: ../../../../omni/soc/st/stm32/hal/syscalls.c
+          for-compiler: GCC
+        - file: ../../../../omni/soc/st/stm32/hal/sysmem.c
+          for-compiler: GCC
+        # - file: ../../../../omni/soc/st/stm32/hal/hal_can.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_dma.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_gpio.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_hwinfo.c
+        # - file: ../../../../omni/soc/st/stm32/hal/hal_i2c.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_irq.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_spi.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_timer.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_udc.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_uhc.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_usart.c
+    - group: device/driver
+      files:
+        - file: ../../../../omni/soc/st/stm32/stm32h7xx/soc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_adc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_adc_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_cec.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_comp.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_cordic.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_cortex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_crc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_crc_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_cryp.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_cryp_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dac.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dac_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dcmi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dfsdm.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dfsdm_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dma.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dma_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dma2d.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dsi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_dts.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_eth.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_eth_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_exti.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_fdcan.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_flash.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_flash_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_fmac.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_gfxmmu.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_gpio.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_hash.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_hash_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_hcd.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_hrtim.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_hsem.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_i2c.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_i2c_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_i2s.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_i2s_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_irda.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_iwdg.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_jpeg.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_lptim.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_ltdc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_ltdc_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_mdios.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_mdma.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_mmc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_nand.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_nor.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_opamp.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_opamp_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_ospi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_otfdec.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_pcd.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_pcd_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_pssi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_pwr.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_pwr_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_qspi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_ramecc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_rcc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_rcc_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_rng.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_rng_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_rtc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_rtc_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_sai.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_sai_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_sd.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_sd_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_sdio.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_sdram.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_smartcard.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_smartcard_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_smbus.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_smbus_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_spdifrx.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_spi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_sram.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_swpmi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_tim.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_tim_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_uart.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_uart_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_usart.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_usart_ex.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_hal_wwdg.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_adc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_bdma.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_comp.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_cordic.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_crc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_crs.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_dac.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_delayblock.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_dma.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_dma2d.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_exti.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_fmac.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_fmc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_gpio.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_hrtim.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_i2c.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_lptim.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_lpuart.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_mdma.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_opamp.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_pwr.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_rcc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_rng.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_rtc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_sdmmc.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_spi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_swpmi.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_tim.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_usart.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_usb.c
+        - file: ../../../../modules/hal_stm32/stm32cube/stm32h7xx/drivers/src/stm32h7xx_ll_utils.c
