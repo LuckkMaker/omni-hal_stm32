@@ -9,6 +9,7 @@ layer:
   define:
     - USE_HAL_DRIVER
     - USE_FULL_LL_DRIVER
+    - USE_PWR_LDO_SUPPLY
 
   add-path:
     # device
