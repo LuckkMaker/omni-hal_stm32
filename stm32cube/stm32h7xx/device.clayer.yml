@@ -4,7 +4,10 @@ layer:
   description: STM32H7xx device layer
   
   packs:
-    - pack: Keil::STM32H7xx_DFP@4.1.3
+    - pack: Keil::STM32H7xx_DFP@4.0.0
+
+  processor:
+    fpu: dp
 
   define:
     - USE_HAL_DRIVER
