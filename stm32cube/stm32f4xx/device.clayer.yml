@@ -50,6 +50,7 @@ layer:
           for-compiler: GCC
         - file: ../../../../omni/soc/st/stm32/hal/hal_can.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_dma.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_flash.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_gpio.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_hwinfo.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_hwtimer.c

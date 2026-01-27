@@ -54,9 +54,10 @@ layer:
           for-compiler: GCC
         # - file: ../../../../omni/soc/st/stm32/hal/hal_can.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_dma.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_flash.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_gpio.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_hwinfo.c
-        # - file: ../../../../omni/soc/st/stm32/hal/hal_i2c.c
+        - file: ../../../../omni/soc/st/stm32/hal/hal_i2c.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_irq.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_spi.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_timer.c
