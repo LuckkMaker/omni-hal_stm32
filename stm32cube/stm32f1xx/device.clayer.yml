@@ -54,7 +54,6 @@ layer:
         - file: ../../../../omni/soc/st/stm32/hal/hal_i2c.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_irq.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_spi.c
-        - file: ../../../../omni/soc/st/stm32/hal/hal_timer.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_udc.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_uhc.c
         - file: ../../../../omni/soc/st/stm32/hal/hal_usart.c
