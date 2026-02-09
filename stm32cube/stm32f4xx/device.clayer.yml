@@ -41,7 +41,15 @@ layer:
     - group: device/startup
       files:
         - file: ./device/src/system_stm32f4xx.c
-        - file: ./device/src/startup_stm32f4xx.c
+        - file: ./$ProjectDir()$/boards/$TargetType$/startup/startup_stm32f407xx.s
+        # - file: ./device/src/startup_stm32f4xx.c
+          for-compiler: AC6
+          for-context: 
+            - +stm32f407ig
+            - +stm32f407ig_ram
+        - file: ./$ProjectDir()$/boards/$TargetType$/startup/startup_stm32f405xx.s
+          for-compiler: AC6
+          for-context: +stm32f405rg
     - group: device/hal
       files:
         - file: ../../../../omni/soc/st/stm32/hal/syscalls.c
