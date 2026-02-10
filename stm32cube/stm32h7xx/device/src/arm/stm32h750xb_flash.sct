@@ -89,8 +89,8 @@
 ;   <o1> Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
  *----------------------------------------------------------------------------*/
-#define __STACK_SIZE    0x00000400
-#define __HEAP_SIZE     0x00000200
+;#define __STACK_SIZE    0x00000400
+;#define __HEAP_SIZE     0x00000200
 
 /*
 ;------------- <<< end of configuration section >>> ---------------------------
@@ -112,7 +112,8 @@
 #define __RO_SIZE           __ROM_SIZE
 
 #define __RW_BASE           __RAM_BASE
-#define __RW_SIZE           (__RAM_SIZE - __STACK_SIZE - __HEAP_SIZE - __VECTOR_SIZE - __RAM_EVR_SIZE)
+;#define __RW_SIZE           (__RAM_SIZE - __STACK_SIZE - __HEAP_SIZE - __VECTOR_SIZE - __RAM_EVR_SIZE)
+#define __RW_SIZE           (__RAM_SIZE - __VECTOR_SIZE - __RAM_EVR_SIZE)
 
 LR_ROM __RO_BASE __RO_SIZE  {                       ; load region size_region
   ER_ROM __RO_BASE __RO_SIZE  {                     ; load address = execution address
@@ -123,7 +124,7 @@ LR_ROM __RO_BASE __RO_SIZE  {                       ; load region size_region
   }
 
 #if __VECTOR_SIZE > 0
-  RW_VECTORS __RW_BASE __VECTOR_SIZE {
+  RW_VECTORS __RW_BASE UNINIT __VECTOR_SIZE {
     * (.vtable)
   }
   
@@ -164,11 +165,11 @@ LR_ROM __RO_BASE __RO_SIZE  {                       ; load region size_region
   }
 #endif
 
-#if __HEAP_SIZE > 0
-  ARM_LIB_HEAP  __HEAP_BASE EMPTY  __HEAP_SIZE  {   ; Reserve empty region for heap
-  }
-#endif
+;#if __HEAP_SIZE > 0
+;  ARM_LIB_HEAP  __HEAP_BASE EMPTY  __HEAP_SIZE  {   ; Reserve empty region for heap
+;  }
+;#endif
 
-  ARM_LIB_STACK __STACK_TOP EMPTY -__STACK_SIZE {   ; Reserve empty region for stack
-  }
+;  ARM_LIB_STACK __STACK_TOP EMPTY -__STACK_SIZE {   ; Reserve empty region for stack
+;  }
 }
