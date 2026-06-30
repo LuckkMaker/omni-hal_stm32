@@ -36,8 +36,9 @@ layer:
   groups:
     - group: device/startup
       files:
-        - file: ./device/src/system_stm32f1xx.c
-        - file: ./device/src/startup_stm32f103xx.c
+        - file: ./$ProjectDir()$/boards/$TargetType$/startup/system_stm32f1xx.c
+        - file: ./$ProjectDir()$/boards/$TargetType$/startup/startup_stm32f103xb.s
+          for-context: +stm32f103cb
     - group: device/driver
       files:
         - file: ../stm32f1xx/drivers/src/stm32f1xx_hal.c

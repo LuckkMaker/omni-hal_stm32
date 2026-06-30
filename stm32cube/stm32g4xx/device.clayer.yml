@@ -33,7 +33,7 @@ layer:
   groups:
     - group: device/startup
       files:
-        - file: ./device/src/system_stm32g4xx.c
+        - file: ./$ProjectDir()$/boards/$TargetType$/startup/system_stm32g4xx.c
         - file: ./$ProjectDir()$/boards/$TargetType$/startup/startup_stm32g474xx.s
           # - file: ./device/src/startup_stm32g4xx.c
           for-compiler: AC6
