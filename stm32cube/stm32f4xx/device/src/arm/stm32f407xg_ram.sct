@@ -41,7 +41,7 @@
 ;   <o> Vector Table RAM Size (in Bytes) <0x0-0xFFFFFFFF:16>
 ; </h>
  *----------------------------------------------------------------------------*/
-#define __VECTOR_SIZE   0x00000200
+#define __VECTOR_SIZE   0x00000000
 
 /*--------------------- Stack / Heap Configuration ---------------------------
 ; <h> Stack / Heap Configuration
