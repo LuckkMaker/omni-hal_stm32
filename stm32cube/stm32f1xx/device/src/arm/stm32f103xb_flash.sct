@@ -77,6 +77,8 @@ LR_ROM __RO_BASE __RO_SIZE  {                       ; load region size_region
   ER_ROM __RO_BASE __RO_SIZE  {                     ; load address = execution address
    *.o (RESET, +First)
    *(InRoot$$Sections)
+   *(omni_init)
+   *(omni_shell_cmd)
    .ANY (+RO)
    .ANY (+XO)
   }

@@ -114,11 +114,24 @@ SECTIONS
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
 
-    /* Insert shell command section here */
+
+
+    /* omni init table */
+
     . = ALIGN(4);
-    _shell_command_start = .; /* Define start of shell command section */
-    KEEP (*(shellCommand))    /* Keep shellCommand section */
-    _shell_command_end = .;   /* Define end of shell command section */
+
+    _omni_init_start = .;
+
+    KEEP(*(omni_init))
+
+    _omni_init_end = .;
+
+    _omni_shell_cmd_start = .;
+
+    KEEP(*(omni_shell_cmd))
+
+    _omni_shell_cmd_end = .;
+
     . = ALIGN(4);
   } >FLASH
 

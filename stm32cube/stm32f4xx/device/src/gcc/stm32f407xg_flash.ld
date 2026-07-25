@@ -109,7 +109,17 @@ SECTIONS
   {
     . = ALIGN(4);
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
-    *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
+    *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
+
+    /* omni init table */
+    . = ALIGN(4);
+    _omni_init_start = .;
+    KEEP(*(omni_init))
+    _omni_init_end = .;
+    _omni_shell_cmd_start = .;
+    KEEP(*(omni_shell_cmd))
+    _omni_shell_cmd_end = .;
+    . = ALIGN(4);
     . = ALIGN(4);
   } >FLASH
 
