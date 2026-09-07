@@ -120,6 +120,7 @@ LR_ROM __RO_BASE __RO_SIZE  {                       ; load region size_region
    *.o (RESET, +First)
    *(InRoot$$Sections)
    *(omni_init)
+   *(omni_device)
    *(omni_shell_cmd)
    .ANY (+RO)
    .ANY (+XO)
