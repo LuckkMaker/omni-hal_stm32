@@ -38,6 +38,7 @@ layer:
       files:
         - file: ./$ProjectDir()$/boards/$TargetType$/startup/system_stm32f1xx.c
         - file: ./$ProjectDir()$/boards/$TargetType$/startup/startup_stm32f103xb.s
+          for-compiler: AC6
           for-context: +stm32f103cb
         # GCC/CLANG 的启动文件是 GNU 汇编，放在模块里（device/src/gcc）
         - file: ./device/src/gcc/startup_stm32f103xb.s
