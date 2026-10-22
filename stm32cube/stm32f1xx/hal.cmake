@@ -1,0 +1,2 @@
+# stm32f1xx 系列的 HAL 额外选项（与 device.clayer.yml 的 define: 保持一致）。
+set(OMNI_HAL_SERIES_DEFINES USE_HAL_DRIVER USE_FULL_LL_DRIVER)
