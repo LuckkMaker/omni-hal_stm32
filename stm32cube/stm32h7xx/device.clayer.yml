@@ -45,6 +45,12 @@ layer:
         # - file: ./device/src/startup_stm32h743xx.c
           for-compiler: AC6
           for-context: +stm32h743ii
+        # GCC/CLANG 的启动文件是 GNU 汇编，放在模块里（device/src/gcc）
+        - file: ./device/src/gcc/startup_stm32h743xx.s
+          for-compiler:
+            - GCC
+            - CLANG
+          for-context: +stm32h743ii
     - group: device/driver
       files:
         - file: ../stm32h7xx/drivers/src/stm32h7xx_hal.c

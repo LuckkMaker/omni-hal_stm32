@@ -39,6 +39,12 @@ layer:
           for-compiler: AC6
           for-context:
             - +stm32g474re
+        # GCC/CLANG 的启动文件是 GNU 汇编，放在模块里（device/src/gcc）
+        - file: ./device/src/gcc/startup_stm32g474xx.s
+          for-compiler:
+            - GCC
+            - CLANG
+          for-context: +stm32g474re
     - group: device/driver
       files:
         - file: ../stm32g4xx/drivers/src/stm32g4xx_hal.c
