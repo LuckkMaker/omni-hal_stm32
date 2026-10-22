@@ -4,7 +4,7 @@ layer:
   description: STM32G4xx device layer
 
   packs:
-    - pack: Keil::STM32G4xx_DFP@2.0.0
+    - pack: Keil::STM32G4xx_DFP@2.2.0
 
   define:
     - USE_HAL_DRIVER
