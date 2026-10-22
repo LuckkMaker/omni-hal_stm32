@@ -123,9 +123,13 @@ SECTIONS
     _omni_init_start = .;
 
     KEEP(*(omni_init))
-
     _omni_init_end = .;
 
+    _omni_device_start = .;
+
+    KEEP(*(omni_device))
+
+    _omni_device_end = .;
     _omni_shell_cmd_start = .;
 
     KEEP(*(omni_shell_cmd))

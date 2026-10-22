@@ -49,6 +49,19 @@ layer:
         - file: ./$ProjectDir()$/boards/$TargetType$/startup/startup_stm32f405xx.s
           for-compiler: AC6
           for-context: +stm32f405rg
+        # GCC/CLANG 的启动文件是 GNU 汇编，放在模块里（与 arm/ 并列的 gcc/ 目录）
+        - file: ./device/src/gcc/startup_stm32f407xx.s
+          for-compiler:
+            - GCC
+            - CLANG
+          for-context:
+            - +stm32f407ig
+            - +stm32f407ig_ram
+        - file: ./device/src/gcc/startup_stm32f405xx.s
+          for-compiler:
+            - GCC
+            - CLANG
+          for-context: +stm32f405rg
     - group: device/driver
       files:
         - file: ../stm32f4xx/drivers/src/stm32f4xx_hal.c
