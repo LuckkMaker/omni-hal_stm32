@@ -1,5 +1,6 @@
 name: hal_stm32
 build:
   cmake: .
-  settings:
-    layer: ../stm32cube/stm32f4xx/device.clayer.yml
+enable: SOC_FAMILY_STM32
+settings:
+  layer: stm32cube/stm32f4xx/device.clayer.yml
